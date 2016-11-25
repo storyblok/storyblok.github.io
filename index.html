@@ -22,7 +22,7 @@
     {{/each}}
   </script>
 
-  <script type="text/template" data-template="container">
+  <script type="text/template" data-template="headline">
     <h1>
       {{text}}
     </h1>
@@ -70,16 +70,24 @@
         getStory('draft');
       })
 
-      // Call ping editor to see if 
-      // we are in the editor
-      // if not load the published version
-      storyblok.pingEditor(function() {
-        if (storyblok.isInEditor()) {
-          getStory('draft');
-        } else {
-          getStory('published');
-        }
-      })
+      if (window.location.hash == '#editmode') {
+        // For demo purposes
+        // use pingEditor in production
+        getStory('draft');
+
+      } else {
+
+        // Call ping editor to see if 
+        // we are in the editor
+        // if not load the published version
+        storyblok.pingEditor(function() {
+          if (storyblok.isInEditor()) {
+            getStory('draft');
+          } else {
+            getStory('published');
+          }
+        })
+      }
     });
   </script>
 </body>
